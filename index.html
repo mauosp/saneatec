@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Saneatec - Gestión Integral en Saneamiento ambiental. Fumigación profesional para hogares y establecimientos comerciales en Medellín." />
+    <meta name="theme-color" content="#0c1f3d" />
+    <title>Saneatec | Saneamiento Ambiental Profesional</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/jpeg" href="/images/logonegro.jpeg" />
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <!-- Formulario oculto requerido por Netlify Forms (detección en build) -->
+    <form name="contacto" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="text" name="serviceType" />
+      <textarea name="message"></textarea>
+    </form>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
