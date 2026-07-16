@@ -67,11 +67,13 @@ const {
       <div class="hero__showcase" :class="{ 'is-visible': step >= 1 }" :style="showcaseStyle">
         <div class="hero__emblem">
           <div class="hero__emblem-glow"></div>
-          <img
-            :src="BRAND.logoLight"
-            :alt="`${BRAND.shortName} logo`"
-            class="hero__emblem-img"
-          />
+          <div class="hero__emblem-frame">
+            <img
+              :src="BRAND.logoLight"
+              :alt="`${BRAND.shortName} logo`"
+              class="hero__emblem-img"
+            />
+          </div>
         </div>
         <p class="hero__brand">{{ BRAND.name }}</p>
         <p class="hero__slogan">{{ SLOGAN }}</p>
@@ -232,20 +234,41 @@ const {
 
 .hero__emblem {
   position: relative;
-  width: min(300px, 62vw);
-  aspect-ratio: 1;
+  width: min(280px, 62vw);
+  height: min(280px, 62vw);
+  flex-shrink: 0;
   border-radius: 50%;
   background: linear-gradient(160deg, #ffffff 0%, #eef2f8 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2.75rem;
   margin-bottom: 1.75rem;
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.15),
     0 32px 80px rgba(0, 0, 0, 0.35),
     0 0 80px rgba(245, 224, 106, 0.12);
   animation: emblem-float 5s ease-in-out infinite;
+}
+
+.hero__emblem-frame {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 78%;
+  height: 78%;
+  overflow: hidden;
+}
+
+.hero__emblem-img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
 }
 
 .hero__emblem-glow {
@@ -264,14 +287,6 @@ const {
 @keyframes glow-breathe {
   0%, 100% { opacity: 0.6; }
   50% { opacity: 1; }
-}
-
-.hero__emblem-img {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
 }
 
 .hero__brand {
@@ -331,18 +346,31 @@ const {
   }
 
   .hero__emblem {
-    width: min(240px, 55vw);
-    padding: 2rem;
+    width: min(200px, 58vw);
+    height: min(200px, 58vw);
+    margin-bottom: 1.25rem;
+  }
+
+  .hero__emblem-frame {
+    width: 82%;
+    height: 82%;
   }
 }
 
 @media (max-width: 480px) {
   .hero__stats {
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
   }
 
   .hero__stat {
-    width: 100%;
+    width: auto;
+    min-width: 0;
+  }
+
+  .hero__stat:last-child {
+    grid-column: 1 / -1;
   }
 }
 </style>

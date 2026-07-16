@@ -24,6 +24,13 @@ const closeMenu = () => {
     class="header"
     :class="{ 'header--scrolled': isScrolled, 'header--menu-open': menuOpen }"
   >
+    <div
+      v-show="menuOpen"
+      class="nav__overlay"
+      @click="closeMenu"
+      aria-hidden="true"
+    />
+
     <nav class="nav container">
       <BrandLogo
         variant="dark"
@@ -50,6 +57,11 @@ const closeMenu = () => {
             @click="closeMenu"
           >
             {{ link.label }}
+          </a>
+        </li>
+        <li class="nav__links-cta">
+          <a href="#contacto" class="btn btn--primary btn--full" @click="closeMenu">
+            Solicitar cotización
           </a>
         </li>
       </ul>

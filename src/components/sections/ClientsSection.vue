@@ -24,25 +24,31 @@ const marqueeClients = [...clients, ...clients];
           acompañamos a organizaciones que exigen los más altos estándares de saneamiento.
         </p>
       </div>
+
+      <ul class="sr-only">
+        <li v-for="client in clients" :key="`sr-${client.name}`">{{ client.name }}</li>
+      </ul>
     </div>
 
-    <div class="clients__marquee clients__marquee--forward" aria-hidden="true">
-      <div class="clients__track">
-        <article v-for="(client, index) in marqueeClients" :key="`${client.name}-${index}`" class="clients__card">
-          <img :src="client.logo" :alt="client.name" loading="lazy" />
-        </article>
+    <div class="clients__marquees">
+      <div class="clients__marquee clients__marquee--forward" aria-hidden="true">
+        <div class="clients__track">
+          <article v-for="(client, index) in marqueeClients" :key="`${client.name}-${index}`" class="clients__card">
+            <img :src="client.logo" :alt="client.name" loading="lazy" />
+          </article>
+        </div>
       </div>
-    </div>
 
-    <div class="clients__marquee clients__marquee--reverse" aria-hidden="true">
-      <div class="clients__track">
-        <article
-          v-for="(client, index) in [...marqueeClients].reverse()"
-          :key="`rev-${client.name}-${index}`"
-          class="clients__card"
-        >
-          <img :src="client.logo" :alt="client.name" loading="lazy" />
-        </article>
+      <div class="clients__marquee clients__marquee--reverse" aria-hidden="true">
+        <div class="clients__track">
+          <article
+            v-for="(client, index) in [...marqueeClients].reverse()"
+            :key="`rev-${client.name}-${index}`"
+            class="clients__card"
+          >
+            <img :src="client.logo" :alt="client.name" loading="lazy" />
+          </article>
+        </div>
       </div>
     </div>
 
@@ -100,10 +106,16 @@ const marqueeClients = [...clients, ...clients];
   line-height: 1.65;
 }
 
+.clients__marquees {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
 .clients__marquee {
   overflow: hidden;
-  margin-bottom: 1.25rem;
   mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
 
 .clients__track {
@@ -111,6 +123,7 @@ const marqueeClients = [...clients, ...clients];
   gap: 1.25rem;
   width: max-content;
   animation: marquee-forward 38s linear infinite;
+  will-change: transform;
 }
 
 .clients__marquee--reverse .clients__track {
@@ -129,6 +142,7 @@ const marqueeClients = [...clients, ...clients];
   border-radius: var(--radius);
   border: 1px solid var(--gray-200);
   box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .clients__card img {
@@ -185,25 +199,47 @@ const marqueeClients = [...clients, ...clients];
   .clients__highlight {
     flex-direction: column;
     text-align: center;
-    margin-bottom: 2rem;
+    margin: 0 auto 1.75rem;
+    padding: 1.25rem 1.35rem;
+  }
+
+  .clients__marquees {
+    gap: 0.85rem;
   }
 
   .clients__marquee {
-    display: none;
+    mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
   }
 
-  .clients__grid-wrap {
-    display: block;
+  .clients__track {
+    gap: 0.85rem;
+    animation-duration: 26s;
+  }
+
+  .clients__marquee--reverse .clients__track {
+    animation-duration: 30s;
+  }
+
+  .clients__card {
+    width: 148px;
+    height: 86px;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+  }
+
+  .clients__card img {
+    max-height: 52px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .clients__track {
-    animation: none;
+  .clients__marquees {
+    display: none;
   }
 
-  .clients__marquee {
-    display: none;
+  .clients__track {
+    animation: none;
   }
 
   .clients__grid-wrap {

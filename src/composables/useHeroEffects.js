@@ -26,13 +26,25 @@ export function useHeroEffects(onReady) {
     mouse.y = 0;
   };
 
-  const showcaseStyle = computed(() => ({
-    transform: `translate3d(${mouse.x * 18}px, ${mouse.y * 18}px, 0)`,
-  }));
+  const showcaseStyle = computed(() => {
+    if (typeof window !== 'undefined' && window.matchMedia('(max-width: 992px)').matches) {
+      return {};
+    }
 
-  const orbStyle = computed(() => ({
-    transform: `translate3d(${mouse.x * -30}px, ${mouse.y * -30}px, 0)`,
-  }));
+    return {
+      transform: `translate3d(${mouse.x * 18}px, ${mouse.y * 18}px, 0)`,
+    };
+  });
+
+  const orbStyle = computed(() => {
+    if (typeof window !== 'undefined' && window.matchMedia('(max-width: 992px)').matches) {
+      return {};
+    }
+
+    return {
+      transform: `translate3d(${mouse.x * -30}px, ${mouse.y * -30}px, 0)`,
+    };
+  });
 
   onMounted(() => {
     startReveal();
